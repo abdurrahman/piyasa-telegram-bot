@@ -1,5 +1,5 @@
 TOKEN='1097144437:AAGmrLEQsZketiSzzRzHUrbAvBb9pxuryV8'
-NGROK_URL='https://06ca68a6f943.ngrok.io'
+NGROK_URL='https://d782180f9c18.ngrok.io'
 HEROKU_APP='https://goldtelegrambot.herokuapp.com'
 BASE_TELEGRAM_API_URL='https://api.telegram.org/bot{}'.format(TOKEN)
 LOCAL_WEBHOOK_ENDPOINT='{}/webhook'.format(NGROK_URL)

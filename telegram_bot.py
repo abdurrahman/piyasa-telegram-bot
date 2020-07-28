@@ -52,10 +52,6 @@ class TelegramBot:
         if self.incoming_message_text == '/hello':
             self.outgoing_message_text = "Hello {} {}!".format(self.first_name, self.last_name)
             success = self.send_message()
-        
-        if self.incoming_message_text == '/rad':
-            self.outgoing_message_text = '🤙'
-            success = self.send_message()
 
         if self.incoming_message_text == '/altin':
             self.outgoing_message_text = self.parse_gold_prices_from_service()
@@ -94,9 +90,11 @@ class TelegramBot:
         """
         res = requests.get('http://www.kulcealtin.com/tcmbjson/')
         decoded_data = json.loads(res.text.encode().decode('utf-8-sig'))
-        result = f"""
-        Dolar: {decoded_data['usdAl']} Alış | {decoded_data['usdSat']} Satış
-        Euro: {decoded_data['eurAl']} Alış | {decoded_data['eurSat']} Satış"""
+        result = f"""🇺🇸 : {decoded_data['usdAl']} Alış | {decoded_data['usdSat']} Satış
+🇪🇺 : {decoded_data['eurAl']} Alış | {decoded_data['eurSat']} Satış
+🇬🇧 : {decoded_data['gbpAl']} Alış | {decoded_data['gbpSat']} Satış
+🇨🇭 : {decoded_data['chfAl']} Alış | {decoded_data['chfSat']} Satış
+🇯🇵 : {decoded_data['jpyAl']} Alış | {decoded_data['jpySat']} Satış"""
         return result
 
     @staticmethod
