@@ -1,4 +1,4 @@
-TOKEN='<your-telegram-token>'
+TOKEN='1171776040:AAFG99v-MA8KEQCT7tTeG9onihxeLk0xi-8'
 NGROK_URL='https://d782180f9c18.ngrok.io'
 HEROKU_APP='https://piyasatr-bot.herokuapp.com'
 BASE_TELEGRAM_API_URL='https://api.telegram.org/bot{}'.format(TOKEN)
