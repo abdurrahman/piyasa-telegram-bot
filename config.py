@@ -1,6 +1,6 @@
-TOKEN='1097144437:AAGmrLEQsZketiSzzRzHUrbAvBb9pxuryV8'
+TOKEN='<your-telegram-token>'
 NGROK_URL='https://d782180f9c18.ngrok.io'
-HEROKU_APP='https://goldtelegrambot.herokuapp.com'
+HEROKU_APP='https://piyasatr-bot.herokuapp.com'
 BASE_TELEGRAM_API_URL='https://api.telegram.org/bot{}'.format(TOKEN)
 LOCAL_WEBHOOK_ENDPOINT='{}/webhook'.format(NGROK_URL)
 REMOTE_WEBHOOK_ENDPOINT='{}/webhook'.format(HEROKU_APP)
