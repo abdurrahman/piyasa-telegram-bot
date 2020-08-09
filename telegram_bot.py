@@ -79,9 +79,11 @@ class TelegramBot:
         """
         res = requests.get('http://www.kulcealtin.com/altinjson/')
         decoded_data = json.loads(res.text.encode().decode('utf-8-sig')) # res.text.encode().decode('utf-8-sig')
-        gaBuy = decoded_data['GAAl']
-        gaSale = decoded_data['GASat']
-        result = 'Gram Altın: {0} Alış | {1} Satış'.format(gaBuy, gaSale)
+        result = f"""Gram Altın: {decoded_data['GAAl']} Alış | {decoded_data['GASat']} Satış
+Çeyrek Altın: {decoded_data['CAl']} Alış | {decoded_data['CSat']} Satış
+Yarım Altın: {decoded_data['YAl']} Alış | {decoded_data['YSat']} Satış
+Tam Altın: {decoded_data['TAl']} Alış | {decoded_data['TSat']} Satış
+Külçe Altın: {decoded_data['GUAl']} Alış | {decoded_data['GUSat']} Satış"""
         return result
          
     def parse_currency_prices_from_service(self):
