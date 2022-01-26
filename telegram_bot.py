@@ -77,14 +77,10 @@ class TelegramBot:
         """
         Retrieves local gold price data
         """
-        res = requests.get('http://www.kulcealtin.com/altinjson/')
-        decoded_data = json.loads(res.text.encode().decode('utf-8-sig')) # res.text.encode().decode('utf-8-sig')
-        result = f"""Gram Altın: {decoded_data['GAAl']} Alış | {decoded_data['GASat']} Satış
-Çeyrek Altın: {decoded_data['CAl']} Alış | {decoded_data['CSat']} Satış
-Yarım Altın: {decoded_data['YAl']} Alış | {decoded_data['YSat']} Satış
-Tam Altın: {decoded_data['TAl']} Alış | {decoded_data['TSat']} Satış
-Külçe Altın: {decoded_data['GUAl']} Alış | {decoded_data['GUSat']} Satış"""
-        return result
+        response = requests.get('https://www.tcmb.gov.tr/kurlar/today.xml')
+        print(response)
+        decoded_data = xmltodict.parse(response.content)
+        return decoded_data
          
     def parse_currency_prices_from_service(self):
         """
