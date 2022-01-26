@@ -73,18 +73,18 @@ class TelegramBot:
 
         return res.status_code == 200
 
-    def parse_currency_prices_from_service(self):
+    def parse_gold_prices_from_service(self):
         """
-        Retrieves local currencies
+        Retrieves local gold price data
         """
         response = requests.get('https://www.tcmb.gov.tr/kurlar/today.xml')
         print(response)
         decoded_data = xmltodict.parse(response.content)
         return decoded_data
          
-    def parse_gold_prices_from_service(self):
+    def parse_currency_prices_from_service(self):
         """
-        Retrieves local gold price data
+        Retrieves local currencies
         """
         res = requests.get('http://www.kulcealtin.com/tcmbjson/')
         decoded_data = json.loads(res.text.encode().decode('utf-8-sig'))
