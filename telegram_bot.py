@@ -1,6 +1,7 @@
 import requests
 import codecs
 import json
+import xmltodict
 
 from config import TELEGRAM_SEND_MESSAGE_URL
 
@@ -77,23 +78,23 @@ class TelegramBot:
         """
         Retrieves local gold price data
         """
-        response = requests.get('https://www.tcmb.gov.tr/kurlar/today.xml')
-        print(response)
-        decoded_data = xmltodict.parse(response.content)
-        return decoded_data
+        res = requests.get('http://www.kulcealtin.com/altinjson/')
+        decoded_data = json.loads(res.text.encode().decode('utf-8-sig')) # res.text.encode().decode('utf-8-sig')
+        result = f"""Gram Altın: {decoded_data['GAAl']} Alış | {decoded_data['GASat']} Satış
+Çeyrek Altın: {decoded_data['CAl']} Alış | {decoded_data['CSat']} Satış
+Yarım Altın: {decoded_data['YAl']} Alış | {decoded_data['YSat']} Satış
+Tam Altın: {decoded_data['TAl']} Alış | {decoded_data['TSat']} Satış
+Külçe Altın: {decoded_data['GUAl']} Alış | {decoded_data['GUSat']} Satış"""
+        return result
          
     def parse_currency_prices_from_service(self):
         """
         Retrieves local currencies
-        """
-        res = requests.get('http://www.kulcealtin.com/tcmbjson/')
-        decoded_data = json.loads(res.text.encode().decode('utf-8-sig'))
-        result = f"""🇺🇸 : {decoded_data['usdAl']} Alış | {decoded_data['usdSat']} Satış
-🇪🇺 : {decoded_data['eurAl']} Alış | {decoded_data['eurSat']} Satış
-🇬🇧 : {decoded_data['gbpAl']} Alış | {decoded_data['gbpSat']} Satış
-🇨🇭 : {decoded_data['chfAl']} Alış | {decoded_data['chfSat']} Satış
-🇯🇵 : {decoded_data['jpyAl']} Alış | {decoded_data['jpySat']} Satış"""
-        return result
+        """        
+        response = requests.get('https://www.tcmb.gov.tr/kurlar/today.xml')
+        print(response)
+        decoded_data = xmltodict.parse(response.content)
+        return decoded_data
 
     @staticmethod
     def init_webhook(url):
