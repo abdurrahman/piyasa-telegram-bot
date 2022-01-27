@@ -90,10 +90,15 @@ Külçe Altın: {decoded_data['GUAl']} Alış | {decoded_data['GUSat']} Satış"
     def parse_currency_prices_from_service(self):
         """
         Retrieves local currencies
-        """        
+        """
+        available_currencies = ['USD','EUR','GBP','CHF','JPY']
         response = requests.get('https://www.tcmb.gov.tr/kurlar/today.xml')
-        print(response)
-        decoded_data = xmltodict.parse(response.content)
+        xml_dict = xmltodict.parse(response.content)
+        currencies = xml_dict['Tarih_Date']['Currency']
+        for currency in currencies:
+            if currency['@CurrencyCode'] in available_currencies:
+                yield ('%s : %s Alış | %s Satış' % (currency['@CurrencyCode'],currency['ForexBuying'],currency['ForexSelling']))
+
         return decoded_data
 
     @staticmethod
