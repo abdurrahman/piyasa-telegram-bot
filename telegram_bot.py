@@ -92,14 +92,18 @@ Külçe Altın: {decoded_data['GUAl']} Alış | {decoded_data['GUSat']} Satış"
         Retrieves local currencies
         """
         available_currencies = ['USD','EUR','GBP','CHF','JPY']
+        flags = ['🇺🇸', '🇪🇺', '🇬🇧', '🇨🇭', '🇯🇵']
         response = requests.get('https://www.tcmb.gov.tr/kurlar/today.xml')
         xml_dict = xmltodict.parse(response.content)
         currencies = xml_dict['Tarih_Date']['Currency']
+        exchange_rates = []
         for currency in currencies:
             if currency['@CurrencyCode'] in available_currencies:
-                yield ('%s : %s Alış | %s Satış' % (currency['@CurrencyCode'],currency['ForexBuying'],currency['ForexSelling']))
+                exchange_rates.append(': %s Alış | %s Satış' % (currency['ForexBuying'],currency['ForexSelling']))
+        result = zip(flags,exchange_rates)
+        zipped_list = list(result)
 
-        return decoded_data
+        return ',\n'.join(map(str,zipped_list))
 
     @staticmethod
     def init_webhook(url):
