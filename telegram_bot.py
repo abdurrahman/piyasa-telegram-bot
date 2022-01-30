@@ -98,9 +98,12 @@ class TelegramBot:
                 exchange_rates.append(': %s Alış | %s Satış' % (currency['ForexBuying'],currency['ForexSelling']))
         result = zip(flags,exchange_rates)
         zipped_list = list(result)
+        rates = ""
+        for k,v in zipped_list:
+            rates += "{}{}\n".format(k,v)
+        # ',\n'.join(map(str,zipped_list))
 
-
-        return ',\n'.join(map(str,zipped_list))
+        return rates
 
     @staticmethod
     def init_webhook(url):
