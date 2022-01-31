@@ -78,8 +78,6 @@ class TelegramBot:
         """
         Retrieves local gold price data
         """
-        res = requests.get('http://www.kulcealtin.com/altinjson/')
-        decoded_data = json.loads(res.text.encode().decode('utf-8-sig')) # res.text.encode().decode('utf-8-sig')
         result = "Out of service"
         return result
          
@@ -92,18 +90,14 @@ class TelegramBot:
         response = requests.get('https://www.tcmb.gov.tr/kurlar/today.xml')
         xml_dict = xmltodict.parse(response.content)
         currencies = xml_dict['Tarih_Date']['Currency']
-        exchange_rates = []
+        result = ""
+        index = 0
         for currency in currencies:
             if currency['@CurrencyCode'] in available_currencies:
-                exchange_rates.append(': %s Alış | %s Satış' % (currency['ForexBuying'],currency['ForexSelling']))
-        result = zip(flags,exchange_rates)
-        zipped_list = list(result)
-        rates = ""
-        for k,v in zipped_list:
-            rates += "{}{}\n".format(k,v)
-        # ',\n'.join(map(str,zipped_list))
+                result += "{} {}\n".format(flags[index], (': %s Alış | %s Satış' % (currency['ForexBuying'],currency['ForexSelling'])))
+                index += 1
 
-        return rates
+        return result
 
     @staticmethod
     def init_webhook(url):
