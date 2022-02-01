@@ -78,8 +78,7 @@ class TelegramBot:
         """
         Retrieves local gold price data
         """
-        result = "Out of service"
-        return result
+        return "Out of service"
          
     def parse_currency_prices_from_service(self):
         """
@@ -92,10 +91,11 @@ class TelegramBot:
         currencies = xml_dict['Tarih_Date']['Currency']
         result = ""
         index = 0
+        print(type(currencies))
         for currency in currencies:
             if currency['@CurrencyCode'] in available_currencies:
-                result += "{} {}\n".format(flags[index], (': %s Alış | %s Satış' % (currency['ForexBuying'],currency['ForexSelling'])))
-                index += 1
+                result += "{}{}\n".format(flags[index], (': %s Alış | %s Satış' % (currency['ForexBuying'],currency['ForexSelling'])))
+                index +=
 
         return result
 
