@@ -6,7 +6,7 @@ Telegram üzerinden t.me/PiyasaTRBot şeklinde ekleyebilirsiniz.
 
 https://t.me/PiyasaTRBot
 
-> Döviz ve altın değerleri http://www.kulcealtin.com/webservisleri.html üzerinden sağlanmıştır.
+> Döviz değerleri https://www.tcmb.gov.tr/ üzerinden sağlanmıştır.
 
 ![PiyasaTRBot](/img/piyasatr-bot.jpg) 
 
